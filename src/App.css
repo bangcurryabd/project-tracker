@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-header {
+  padding: 1rem;
+  background-color: var(--tg-theme-bg-color, #ffffff);
+  color: var(--tg-theme-text-color, #000000);
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+}
+
+/* Custom styles for the circular progress bar */
+.recharts-wrapper {
+  margin: 0 auto;
+}
+
+.recharts-surface {
+  overflow: visible;
+} 
