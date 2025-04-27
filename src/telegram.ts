@@ -1,22 +1,38 @@
-import { WebApp } from '@twa-dev/sdk';
+declare global {
+  interface Window {
+    Telegram: {
+      WebApp: any;
+    };
+  }
+}
 
-// Initialize the Telegram WebApp
-WebApp.ready();
+export const tg = window.Telegram.WebApp;
 
-// Export the WebApp instance for use throughout the app
-export const tg = WebApp;
+// Initialize the WebApp
+tg.ready();
 
-// Export user information
-export const user = {
-  id: tg.initDataUnsafe.user?.id,
-  username: tg.initDataUnsafe.user?.username,
-  firstName: tg.initDataUnsafe.user?.first_name,
-  lastName: tg.initDataUnsafe.user?.last_name,
-};
+// Enable closing confirmation
+tg.enableClosingConfirmation();
+
+// Set the main button color to match Telegram's theme
+tg.MainButton.setParams({
+  text_color: '#FFFFFF',
+  color: tg.themeParams.button_color || '#2481cc',
+});
 
 // Export theme information
 export const theme = {
   isDark: tg.colorScheme === 'dark',
   backgroundColor: tg.backgroundColor,
-  headerColor: tg.headerColor,
+  textColor: tg.themeParams.text_color,
+  buttonColor: tg.themeParams.button_color,
+  buttonTextColor: tg.themeParams.button_text_color,
+};
+
+// Export user information (if available)
+export const user = tg.initDataUnsafe?.user || {
+  id: null,
+  username: null,
+  firstName: 'Guest',
+  lastName: null,
 }; 
